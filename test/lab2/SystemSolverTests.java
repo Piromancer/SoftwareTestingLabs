@@ -17,11 +17,6 @@ public class SystemSolverTests {
     }
 
     @Test
-    public void test_logging() {
-        CSV_Logger.log("C:\\Users\\DVR_ITMO\\Desktop\\Нетеряшка\\7 семестр\\SoftwareTesting\\test.csv", 2, 4);
-    }
-
-    @Test
     public void test_sin() {
         assertEquals(2, sin(-Math.PI/2));
     }

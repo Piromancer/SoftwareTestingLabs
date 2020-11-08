@@ -76,7 +76,22 @@ public class IntegrationStep3 {
 
     @Test
     public void test_solveSystem_negativeArgument_extreme2() {
-        assertEquals(0, solveSystem(-0.4184).setScale(4, RoundingMode.HALF_UP));
+        assertEquals(BigDecimal.valueOf(0.0000), solveSystem(-0.4184).setScale(4, RoundingMode.HALF_UP));
+    }
+
+    @Test
+    public void test_solveSystem_negativeArgument_extreme3() {
+        assertEquals(BigDecimal.valueOf(0.0000), solveSystem(-5.5629).setScale(4, RoundingMode.HALF_UP));
+    }
+
+    @Test
+    public void test_solveSystem_negativeArgument_extreme4() {
+        assertEquals(BigDecimal.valueOf(0.0000), solveSystem(-4.1357).setScale(4, RoundingMode.HALF_UP));
+    }
+
+    @Test
+    public void test_solveSystem_negativeArgument_extreme5() {
+        assertEquals(BigDecimal.valueOf(0.0000), solveSystem(-3.7169).setScale(4, RoundingMode.HALF_UP));
     }
 
 
@@ -85,7 +100,7 @@ public class IntegrationStep3 {
 
     @Test
     public void test_solveSystem_negativeArgument_root() {
-        assertEquals(0, solveSystem(-2.146).setScale(4, RoundingMode.HALF_UP));
+        assertEquals(BigDecimal.valueOf(0.0000), solveSystem(-2.146).setScale(4, RoundingMode.HALF_UP));
     }
 
     @Test
