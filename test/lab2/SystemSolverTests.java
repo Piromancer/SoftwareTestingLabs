@@ -1,49 +1,58 @@
 package lab2;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.Test;
-import static lab2.scarySystemSolver.*;
-import static lab2.taylorTrigonometry.*;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Arrays;
-import java.util.Collection;
+import static lab2.ScarySystemSolver.*;
+import static lab2.TaylorTrigonometry.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SystemSolverTests {
     @Test
     public void test_test() {
-        //Assertions.assertNotEquals();
-        Assertions.assertEquals(2, solveSystem(-2));
+        assertEquals(2, solveSystem(-2));
+    }
+
+    @Test
+    public void test_test2() {
+        assertEquals(2, solveSystem(2));
+    }
+
+    @Test
+    public void test_logging() {
+        CSV_Logger.log("C:\\Users\\DVR_ITMO\\Desktop\\Нетеряшка\\7 семестр\\SoftwareTesting\\test.csv", 2, 4);
     }
 
     @Test
     public void test_sin() {
-        //Assertions.assertNotEquals();
-        Assertions.assertEquals(2, sin(Math.PI));
+        assertEquals(2, sin(-Math.PI/2));
     }
 
     @Test
     public void test_cos() {
-        //Assertions.assertNotEquals();
-        Assertions.assertEquals(2, cos(Math.PI));
+        assertEquals(2, cos(-2));
     }
 
     @Test
     public void test_tan() {
-        //Assertions.assertNotEquals();
-        Assertions.assertEquals(2, tan(Math.PI));
+        assertEquals(2, tan(-2));
     }
 
     @Test
     public void test_ctg() {
-        //Assertions.assertNotEquals();
-        Assertions.assertEquals(2, ctg(Math.PI));
+        assertEquals(2, ctg(-2));
     }
 
     @Test
     public void test_csc() {
-        //Assertions.assertNotEquals();
-        Assertions.assertEquals(2, csc(Math.PI));
+        assertEquals(2, csc(-2));
+    }
+
+    @Test
+    public void test_log_2() {
+        assertEquals(4, log(16, 2));
+    }
+
+    @Test
+    public void test_log_3() {
+        assertEquals(3, log(27, 3));
     }
 }

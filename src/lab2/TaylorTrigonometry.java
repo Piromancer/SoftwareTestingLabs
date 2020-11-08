@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 
-public class taylorTrigonometry {
+public class TaylorTrigonometry {
 
     private static BigInteger factorial(long n){
         if(n < 0) return BigInteger.valueOf(1);
@@ -17,8 +17,11 @@ public class taylorTrigonometry {
     public static BigDecimal sin(double x, int precision){
         //if(termsNumber <= 0) throw new ArithmeticException("Non-positive number of terms: " + termsNumber);
         x = x % (2 * Math.PI);
+        BigDecimal epsilon = BigDecimal.valueOf(Math.pow(10, -precision));
         BigDecimal result = BigDecimal.valueOf(x);
-        for(int i = 1; i < 10 /* turn into check precision */; i++){
+        BigDecimal previousResult = BigDecimal.valueOf(-Integer.MIN_VALUE);
+        for(int i = 1; !(result.subtract(previousResult).abs().compareTo(epsilon) == -1); i++){
+            previousResult = result;
             result = result.add(
                     BigDecimal.valueOf(Math.pow(-1, i))
                             .multiply(BigDecimal.valueOf(x).pow(2*i+1))
@@ -73,15 +76,18 @@ public class taylorTrigonometry {
 
     public static BigDecimal ln(double x, int precision){
         if(x <= 0) throw new ArithmeticException("Logarithm can't accept non-positive values");
-        BigDecimal result = new BigDecimal(x);
-        for (int i = 2; i < 10; i++) {
-            result.add(
-                    BigDecimal.valueOf(
-                            Math.pow(-1, i+1) * Math.pow(x-1, i)
-                    )
+        BigDecimal epsilon = BigDecimal.valueOf(Math.pow(10, -precision));
+        BigDecimal result = new BigDecimal((x-1)/(x+1));
+        BigDecimal previousResult = BigDecimal.valueOf(-Integer.MIN_VALUE);
+        BigDecimal initRatio = new BigDecimal((x-1)/(x+1));
+        for (int i = 1; !(result.subtract(previousResult).abs().compareTo(epsilon) == -1); i++) {
+            previousResult = result;
+            BigDecimal factor = BigDecimal.valueOf(2*i+1);
+            result = result.add(
+                initRatio.pow(2*i+1).divide(factor, 4, RoundingMode.HALF_UP)
             );
         }
-        return result;
+        return result.multiply(BigDecimal.valueOf(2));
     }
 
     public static BigDecimal log(double x, int base, int precision){
@@ -93,7 +99,7 @@ public class taylorTrigonometry {
     }
 
     public static BigDecimal log(double x, int base){
-        return ln(x, 4).divide(ln(base, 4), 4, RoundingMode.HALF_UP);
+        return ln(x).divide(ln(base), 4, RoundingMode.HALF_UP);
     }
 
 }

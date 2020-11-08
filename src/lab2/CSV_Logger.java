@@ -1,18 +1,20 @@
 package lab2;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class CSV_Logger {
 
     public static void log(String fileName, Object ... arguments){
         try {
             File csvFile = new File(fileName);
-            csvFile.createNewFile();
-            FileWriter fw = new FileWriter(csvFile);
-            for (Object i : arguments){
-                fw.write(i.toString() + ", ");
+            if (!csvFile.exists())
+                csvFile.createNewFile();
+            FileWriter fw = new FileWriter(csvFile, true);
+            for (int i = 0; i < arguments.length; i++){
+                if (i != arguments.length - 1)
+                    fw.write(arguments[i].toString() + ", ");
+                else
+                    fw.write(arguments[i].toString() + "\n");
             }
             fw.close();
         } catch (IOException e) {
