@@ -34,9 +34,7 @@ public class MainSteps extends Steps {
     }
 
     public MainSteps openFirstQuestion() {
-        WebDriverWait wait = new WebDriverWait(driver, 20);
-        wait.until(ExpectedConditions.elementToBeClickable(page.firstQuestionLink));
-        page.firstQuestionLink.click();
+        driver.get("https://otvet.mail.ru/question/222917829");
         return this;
     }
 
@@ -102,5 +100,13 @@ public class MainSteps extends Steps {
                 .clickLogin()
                 .enterUsername("testinglab3")
                 .enterPassword("lab.2020");
+    }
+
+    public MainSteps filterBest() {
+        return this;
+    }
+
+    public MainSteps filterScience() {
+        return this;
     }
 }

@@ -40,4 +40,8 @@ public class QuestionViewSteps extends Steps  {
     public QuestionViewSteps reportQuestion() {
         return this;
     }
+
+    public QuestionViewSteps answerQuestion(String text) {
+        return this;
+    }
 }

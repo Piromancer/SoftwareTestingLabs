@@ -22,7 +22,6 @@ public class OtvetMailTests {
         main = new MainSteps(driver);
         questionCreation = new QuestionCreationSteps(driver);
         questionView = new QuestionViewSteps(driver);
-//        mainSteps = new MainSteps(driver);
     }
 
     @Test
@@ -58,7 +57,19 @@ public class OtvetMailTests {
     }
 
     @Test
-    public void setLike(){
+    public void filterByStatus(){
+        main.openMain()
+                .filterBest();
+    }
+
+    @Test
+    public void filterByCategory(){
+        main.openMain()
+                .filterScience();
+    }
+
+    @Test
+    public void setLikeChangesColor(){
         main.openMain()
                 .clickLogin()
                 .enterUsername("testinglab3")
@@ -68,17 +79,39 @@ public class OtvetMailTests {
     }
 
     @Test
+    public void reportQuestion(){
+        main.openMain()
+                .clickLogin()
+                .enterUsername("testinglab3")
+                .enterPassword("lab.2020")
+                .openFirstQuestion();
+        questionView.reportQuestion();
+    }
+
+    @Test
+    public void answerQuestion(){
+        main.openMain()
+                .clickLogin()
+                .enterUsername("testinglab3")
+                .enterPassword("lab.2020")
+                .openFirstQuestion();
+        questionView.answerQuestion("42");
+    }
+
+    @Test
     public void createQuestion(){
-        main.loginWithCorrectCreds()
-                .openQuestionCreation();
+        main.openMain()
+                .openQuestionCreation()
+                .loginWithCorrectCreds();
         questionCreation.fillQuestionForm("Как создать вопрос на ответ мэйл ру?", "", 2, 2)
                 .checkQuestionWasPosted("Как создать вопрос на ответ мэйл ру?");
     }
 
     @Test
     public void createSurvey(){
-        main.loginWithCorrectCreds()
-                .openQuestionCreation();
+        main.openMain()
+                .openQuestionCreation()
+                .loginWithCorrectCreds();
         questionCreation.switchToSurvey()
                 .fillSurveyForm("Как создать опрос на ответ мэйл ру?", "", 2, 2, "Так", "Сяк", "Наперекосяк")
                 .checkQuestionWasPosted("Как создать опрос на ответ мэйл ру?");
@@ -87,6 +120,6 @@ public class OtvetMailTests {
 
     @After
     public void tearDown() {
-        //driver.quit();
+        driver.quit();
     }
 }
